@@ -33,15 +33,17 @@ const HeroSection = () => {
           <iframe 
             title="Tilt Brush - Ronin" 
             frameBorder="0" 
-            allowFullScreen 
-            mozallowfullscreen="true" 
-            webkitallowfullscreen="true" 
+            allowFullScreen={true}
             allow="autoplay; fullscreen; xr-spatial-tracking" 
-            xr-spatial-tracking 
-            execution-while-out-of-viewport="true" 
-            execution-while-not-rendered="true" 
-            web-share 
             src="https://sketchfab.com/models/cac025847c6344899c5c18af270d0cb5/embed"
+            style={{ width: '100%', height: '100%' }}
+            // Custom attributes need to be added via data attributes to avoid TypeScript errors
+            data-mozallowfullscreen="true"
+            data-webkitallowfullscreen="true"
+            data-xr-spatial-tracking=""
+            data-execution-while-out-of-viewport=""
+            data-execution-while-not-rendered=""
+            data-web-share=""
           ></iframe>
         </div>
         {/* Overlay to control visibility and contrast */}
