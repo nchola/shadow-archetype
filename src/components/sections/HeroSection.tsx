@@ -1,88 +1,89 @@
+import React, { useEffect, useRef, useState } from "react";
+import ModelViewer from '../ModelViewer';
 
-import React, { useEffect, useRef } from "react";
-
-const HeroSection = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+const TypewriterText = ({ text, delay = 50, onComplete }: { text: string; delay?: number; onComplete?: () => void }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (titleRef.current) {
-      titleRef.current.classList.add("animate-fade-in");
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+
+      return () => clearTimeout(timer);
+    } else if (onComplete) {
+      onComplete();
     }
-    setTimeout(() => {
-      if (subtitleRef.current) {
-        subtitleRef.current.classList.add("animate-fade-in");
-      }
-    }, 300);
-    setTimeout(() => {
-      if (buttonRef.current) {
-        buttonRef.current.classList.add("animate-fade-in");
-      }
-    }, 600);
-  }, []);
+  }, [currentIndex, delay, text, onComplete]);
+
+  return <span>{displayText}</span>;
+};
+
+const HeroSection = () => {
+  const [showFirstLine, setShowFirstLine] = useState(true);
+  const [showSecondLine, setShowSecondLine] = useState(false);
+  const [showThirdLine, setShowThirdLine] = useState(false);
 
   return (
-    <section id="hero" className="relative h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden bg-shadow-primary">
-      {/* 3D Model as background */}
-      <div className="absolute inset-0 w-full h-full model-container z-0">
-        <div className="sketchfab-embed-wrapper w-full h-full flex items-center justify-center">
-          <iframe 
-            title="Tilt Brush - Ronin"
-            frameBorder="0"
-            allowFullScreen
-            allow="autoplay; fullscreen; xr-spatial-tracking"
-            src="https://sketchfab.com/models/cac025847c6344899c5c18af270d0cb5/embed"
-            className="w-full h-full min-h-[400px] max-h-[90vh] rounded-xl shadow-2xl border border-shadow-accent/40"
-            style={{ background: "transparent" }}
-            data-mozallowfullscreen="true"
-            data-webkitallowfullscreen="true"
-            data-xr-spatial-tracking=""
-            data-execution-while-out-of-viewport=""
-            data-execution-while-not-rendered=""
-            data-web-share=""
-          ></iframe>
+    <section className="min-h-screen bg-black relative overflow-hidden flex items-center">
+      {/* Left side - 3D Model */}
+      <div className="w-1/2 h-screen relative">
+        <div className="absolute inset-0">
+          <ModelViewer
+            modelUrl="https://sketchfab.com/models/ec07ac844bc747518759436172b6f773/embed"
+            title="APOMIXIS"
+            className="w-full h-full"
+            isActive={true}
+            preload={true}
+            priority={1}
+          />
         </div>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-shadow-primary/80 via-transparent to-shadow-primary/95 pointer-events-none"></div>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black opacity-90" />
       </div>
 
-      {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 mt-8 md:mt-0">
-        <h1
-          ref={titleRef}
-          className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 drop-shadow-lg"
-          style={{ textShadow: "0 0 10px #FF4D4D80" }}
-        >
-          KOLEKSI <span className="text-shadow-accent">3D</span> PRIBADI
-        </h1>
-        <p
-          ref={subtitleRef}
-          className="text-shadow-text-muted text-lg md:text-xl max-w-2xl mb-8 opacity-0"
-        >
-          Eksplorasi kepribadian <span className="text-shadow-accent font-bold">Shadow Archetype</span> melalui visual 3D unik. Interaktif, personal, artistik.
-        </p>
-        <button
-          ref={buttonRef}
-          className="button-primary opacity-0"
-          onClick={() => document.getElementById('assetgrid')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          LIHAT SEMUA ASSET
-        </button>
-        {/* Info bawah model sesuai embed */}
-        <div className="mt-6 text-xs text-shadow-text-muted bg-black/60 px-3 py-2 rounded-lg inline-block backdrop-blur-md">
-          <a href="https://sketchfab.com/3d-models/tilt-brush-ronin-cac025847c6344899c5c18af270d0cb5?utm_medium=embed&utm_campaign=share-popup&utm_content=cac025847c6344899c5c18af270d0cb5" target="_blank" rel="nofollow" className="text-shadow-accent font-bold underline">
-            Tilt Brush - Ronin
-          </a>{" "}
-          by{" "}
-          <a href="https://sketchfab.com/joshuu?utm_medium=embed&utm_campaign=share-popup&utm_content=cac025847c6344899c5c18af270d0cb5" target="_blank" rel="nofollow" className="text-shadow-accent font-bold underline">
-            Joshua Eiten
-          </a>{" "}
-          on{" "}
-          <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=cac025847c6344899c5c18af270d0cb5" target="_blank" rel="nofollow" className="font-bold underline text-[#1CAAD9]">
-            Sketchfab
-          </a>
+      {/* Right side - Text Content */}
+      <div className="w-1/2 pl-16 pr-8 relative z-10">
+        <div className="space-y-4">
+          <h1 className="font-orbitron text-4xl font-bold text-white tracking-wider leading-tight">
+            {showFirstLine && (
+              <TypewriterText 
+                text="EXPLORING THE DEPTHS OF" 
+                onComplete={() => setShowSecondLine(true)}
+              />
+            )}
+            {showSecondLine && (
+              <div className="mt-2">
+                <TypewriterText 
+                  text="SHADOW ARCHETYPE"
+                  onComplete={() => setShowThirdLine(true)}
+                />
+              </div>
+            )}
+            {showThirdLine && (
+              <div className="mt-2">
+                <TypewriterText 
+                  text="THROUGH IMMERSIVE 3D EXPERIENCES"
+                />
+              </div>
+            )}
+          </h1>
         </div>
+      </div>
+
+      {/* Background gradients */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute right-0 top-0 w-1/3 h-full opacity-30"
+          style={{
+            background: `
+              radial-gradient(circle at right, rgba(56, 189, 248, 0.15), transparent 70%),
+              radial-gradient(circle at right top, rgba(139, 92, 246, 0.1), transparent 60%),
+              linear-gradient(to left, rgba(20, 184, 166, 0.1), transparent)
+            `
+          }}
+        />
       </div>
     </section>
   );

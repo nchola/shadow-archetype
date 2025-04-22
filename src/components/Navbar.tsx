@@ -37,20 +37,7 @@ const Navbar = () => {
           SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
         </a>
 
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#hero" className="text-shadow-text hover:text-shadow-accent transition-colors">
-            Home
-          </a>
-          <a href="#about" className="text-shadow-text hover:text-shadow-accent transition-colors">
-            About
-          </a>
-          <a href="#projects" className="text-shadow-text hover:text-shadow-accent transition-colors">
-            Projects
-          </a>
-          <a href="#contact" className="text-shadow-text hover:text-shadow-accent transition-colors">
-            Contact
-          </a>
-        </nav>
+        
 
         <Button
           onClick={toggleMobileMenu}

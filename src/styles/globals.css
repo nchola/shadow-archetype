@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .card-reveal {
+    @apply transition-all duration-1000 ease-out;
+  }
+
+  .card-reveal-enter {
+    @apply opacity-0 translate-y-[100%];
+  }
+
+  .card-reveal-enter-active {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Custom animation keyframes */
+@keyframes tetrisRotate {
+  0% {
+    transform: translateY(100%) rotate(12deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes tetrisScale {
+  0% {
+    transform: translateY(100%) scale(0.75);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tetrisSpin {
+  0% {
+    transform: translateY(100%) rotate(-12deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+} 
