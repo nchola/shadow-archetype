@@ -16,45 +16,53 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({ title, url, page }) => 
   return (
     <div
       className={cn(
-        "relative bg-shadow-secondary/60 glass-panel overflow-hidden border border-shadow-accent/25 transition-all duration-500 rounded-2xl shadow-lg group flex flex-col items-center justify-center",
-        "hover:shadow-2xl hover:border-shadow-accent/60 hover:scale-[1.035] hover:bg-shadow-secondary/80"
+        // Menghilangkan border, shadow dan glass-panel agar hanya 3D embed
+        "relative flex flex-col items-center justify-center group transition-all duration-500 w-full",
+        "rounded-3xl overflow-hidden",
+        "hover:scale-[1.03]"
       )}
-      style={{ minHeight: 340, maxWidth: 460, margin: "auto" }}
+      style={{
+        minHeight: 0,
+        maxWidth: "100%",
+        margin: "auto",
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Loading Skeleton */}
+      {/* Loading Overlay */}
       {loading && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-shadow-primary/40 animate-pulse">
-          <div className="w-3/4 h-28 rounded-xl bg-shadow-secondary/40 mb-3" />
-          <div className="w-2/5 h-4 rounded bg-shadow-accent/30" />
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/5 animate-pulse pointer-events-none">
+          <div className="w-3/5 h-36 rounded-lg bg-shadow-secondary/10" />
         </div>
       )}
 
       {/* 3D Embed */}
-      <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden relative">
+      <div className="w-full aspect-[16/10] relative rounded-3xl overflow-hidden">
         <iframe
           title={title}
           src={url}
           allow="autoplay; fullscreen; xr-spatial-tracking"
           allowFullScreen
-          className={cn("w-full h-full border-0 rounded-2xl transition-opacity", loading ? "opacity-0" : "opacity-100")}
+          className={cn(
+            "w-full h-full block transition-opacity duration-300",
+            loading ? "opacity-0" : "opacity-100",
+          )}
           onLoad={() => setLoading(false)}
         />
-        {/* Optional overlay: button muncul saat hover */}
+
+        {/* Tombol "View on Sketchfab" (hanya saat hover) */}
         <a
           href={page}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
-            "absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100",
-            "transition-opacity"
+            "absolute bottom-5 right-5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
           )}
         >
           <Button
             size="sm"
             variant="secondary"
-            className="backdrop-blur bg-shadow-primary/40 border border-shadow-accent/40 hover:bg-shadow-primary/70 text-shadow-text font-medium shadow-md"
+            className="backdrop-blur bg-shadow-primary/60 border-none text-shadow-text font-medium shadow-lg"
           >
             View on Sketchfab
           </Button>
@@ -65,4 +73,3 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({ title, url, page }) => 
 };
 
 export default Showcase3DCard;
-

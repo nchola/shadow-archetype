@@ -1,23 +1,18 @@
+
 import React from "react";
 import Showcase3DCard from "../Showcase3DCard";
 
 const assets = [
   {
-    title: "Tilt Brush - Ronin",
-    url: "https://sketchfab.com/models/cac025847c6344899c5c18af270d0cb5/embed",
-    page: "https://sketchfab.com/3d-models/tilt-brush-ronin-cac025847c6344899c5c18af270d0cb5",
+    title: "Feudal Japan: Oiran",
+    url: "https://sketchfab.com/models/27be63b9f5014121a4f5021e6514c47d/embed",
+    page: "https://sketchfab.com/3d-models/feudal-japan-oiran-27be63b9f5014121a4f5021e6514c47d",
   },
   {
-    title: "The Shadow",
-    url: "https://sketchfab.com/models/6d483da57ec643ae84e45525ecb906d1/embed",
-    page: "https://sketchfab.com/3d-models/the-shadow-6d483da57ec643ae84e45525ecb906d1",
+    title: "Particle Wave",
+    url: "https://sketchfab.com/models/072b42ac6b8d4c93a55f3c524e44b2f3/embed?ui_infos=0",
+    page: "https://sketchfab.com/3d-models/particle-wave-072b42ac6b8d4c93a55f3c524e44b2f3",
   },
-  {
-    title: "Shadow Face",
-    url: "https://sketchfab.com/models/0f694c94b2b8461ab9db6aa4ac88e126/embed",
-    page: "https://sketchfab.com/3d-models/shadow-face-0f694c94b2b8461ab9db6aa4ac88e126",
-  },
-  // Tambah asset koleksi lain di sini...
 ];
 
 const AssetGridSection = () => (
@@ -25,7 +20,7 @@ const AssetGridSection = () => (
     <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-12 text-center animate-fade-in">
       KOLEKSI <span className="text-shadow-accent">3D</span>
     </h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 items-center max-w-6xl mx-auto">
       {assets.map((asset, idx) => (
         <Showcase3DCard
           key={idx}
