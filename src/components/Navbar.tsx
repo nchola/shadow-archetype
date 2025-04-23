@@ -1,8 +1,7 @@
-
-import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,15 +31,29 @@ const Navbar = () => {
           : "bg-transparent py-5"
       )}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center px-4">
+        <div className="flex-1">
+          {/* Left side content if needed */}
+        </div>
         
-
-        
+        {/* Brand Name - Centered on mobile, right-aligned on desktop */}
+        <div className="flex-1 flex justify-end">
+          <h2 className="font-orbitron text-lg md:text-xl font-bold transition-all duration-300">
+            <span className={cn(
+              "bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text",
+              isScrolled ? "opacity-100" : "opacity-80 hover:opacity-100"
+            )}>
+              <a href="#" className="text-shadow-text font-orbitron text-lg md:text-2xl font-bold">
+                SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
+              </a>
+            </span>
+          </h2>
+        </div>
 
         <Button
           onClick={toggleMobileMenu}
           variant="ghost"
-          className="md:hidden text-shadow-text hover:bg-shadow-secondary"
+          className="md:hidden text-shadow-text hover:bg-shadow-secondary ml-4"
         >
           <Menu />
         </Button>

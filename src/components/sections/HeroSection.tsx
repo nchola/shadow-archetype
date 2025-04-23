@@ -28,22 +28,11 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen bg-black relative overflow-hidden flex flex-col md:flex-row items-center">
-      {/* Brand Name */}
-      <div className="absolute top-4 md:top-8 right-4 md:right-8 z-20">
-        <h2 className="font-orbitron text-lg md:text-xl font-bold">
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-            <a href="#" className="text-shadow-text font-orbitron text-lg md:text-2xl font-bold">
-              SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
-            </a>
-          </span>
-        </h2>
-      </div>
-
       {/* 3D Model - Full width on mobile, half width on desktop */}
       <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative">
         <div className="absolute inset-0">
           <ModelViewer
-            modelUrl="https://sketchfab.com/models/606b7fe570dd4ae38e59fe3acf81e8a0/embed?ui_animations=0&ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0"
+            modelUrl="https://sketchfab.com/models/606b7fe570dd4ae38e59fe3acf81e8a0/embed?ui_animations=0&ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0&ui_controls=0&ui_watermark=0&ui_hint=0"
             title="Core-collapse Supernova"
             className="w-full h-full"
             isActive={true}
