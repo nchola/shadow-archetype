@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Asset } from '../../data/assets';
@@ -21,6 +21,7 @@ const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) =
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeIndex, setActiveIndex] = useState(-1);
   const parentRef = useRef<HTMLDivElement>(null);
+  const autoPlayInterval = useRef<NodeJS.Timeout>();
 
   // Filter assets based on selected category
   const filteredAssets = useMemo(() => 
@@ -28,10 +29,33 @@ const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) =
     [selectedCategory, assets]
   );
 
+  // Auto-play functionality
+  useEffect(() => {
+    if (filteredAssets.length > 0) {
+      autoPlayInterval.current = setInterval(() => {
+        setActiveIndex(prev => {
+          const nextIndex = (prev + 1) % filteredAssets.length;
+          return nextIndex;
+        });
+      }, 14000); // 12 seconds interval
+    }
+
+    return () => {
+      if (autoPlayInterval.current) {
+        clearInterval(autoPlayInterval.current);
+      }
+    };
+  }, [filteredAssets.length]);
+
   // Handle category change
   const handleCategoryChange = useCallback((categoryId: string) => {
     setSelectedCategory(categoryId);
     setActiveIndex(-1);
+  }, []);
+
+  // Handle card activation
+  const handleCardActivate = useCallback((index: number) => {
+    setActiveIndex(prev => prev === index ? -1 : index);
   }, []);
 
   return (
@@ -76,7 +100,7 @@ const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) =
                 index={idx}
                 totalItems={filteredAssets.length}
                 viewportPosition={{ top: 0, bottom: 0 }}
-                onActivate={() => setActiveIndex(idx)}
+                onActivate={() => handleCardActivate(idx)}
               />
             </motion.div>
           ))}

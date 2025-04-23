@@ -65,7 +65,7 @@ const HeroSection = () => {
             {showThirdLine && (
               <div className="mt-2">
                 <TypewriterText 
-                  text="THROUGH IMMERSIVE 3D EXPERIENCES"
+                  text="THROUGH IMMERSIVE 3D EXPERIENCES AND VISUAL STORYTELLING"
                 />
               </div>
             )}
