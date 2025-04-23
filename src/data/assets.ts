@@ -1,4 +1,3 @@
-import { Asset } from '../types';
 
 export interface Asset {
   title: string;

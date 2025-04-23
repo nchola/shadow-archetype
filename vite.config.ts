@@ -20,14 +20,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    rollupOptions: {
-      external: ['@splinetool/runtime'],
-      output: {
-        globals: {
-          '@splinetool/runtime': 'splinetool'
-        }
-      }
-    },
     commonjsOptions: {
       include: [/@splinetool\/.*/, /node_modules/]
     }
