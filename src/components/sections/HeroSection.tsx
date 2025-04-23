@@ -38,10 +38,11 @@ const HeroSection = () => {
             isActive={true}
             preload={true}
             priority={1}
+            isCardView={false}
           />
         </div>
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black opacity-90" />
+        {/* Modify gradient overlay to not block interactions */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black opacity-90 pointer-events-none" />
       </div>
 
       {/* Right side - Text Content */}

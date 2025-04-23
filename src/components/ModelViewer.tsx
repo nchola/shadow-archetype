@@ -141,7 +141,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({
     isCardView 
       ? '&ui_controls=0&ui_infos=0&ui_watermark=0&ui_ar=0&ui_help=0&ui_settings=0&ui_fullscreen=0&ui_annotations=0&ui_stop=0&ui_share=0&ui_inspector=0&ui_vr=0&ui_forms=0&ui_hint=0' 
       : '&ui_theme=dark&ui_controls=1&ui_infos=1&ui_watermark=0&ui_ar=1&ui_help=1&ui_settings=1&ui_fullscreen=1&ui_annotations=1&ui_stop=1&ui_share=1&ui_inspector=1&ui_vr=1&ui_forms=1&ui_hint=1'
-  }&api_version=1.12.1&internal=1`;
+  }&api_version=1.12.1&internal=1&ui_animations=1&ui_general_controls=1`;
 
   return (
     <div 
@@ -160,7 +160,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({
         allowFullScreen
         onLoad={handleLoad}
         loading="lazy"
-        style={{ background: 'transparent', pointerEvents: 'auto' }}
+        style={{ background: 'transparent', pointerEvents: 'auto', cursor: 'grab' }}
       />
     </div>
   );
