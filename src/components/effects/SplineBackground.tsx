@@ -1,10 +1,9 @@
-import React, { Suspense, useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState, lazy } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion, AnimatePresence } from 'framer-motion';
-import ErrorBoundary from '../ErrorBoundary';
 
-// Dynamic import with explicit path and type assertion
-const Spline = React.lazy(() => import('@splinetool/react-spline'));
+// Dynamically import Spline with no SSR
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 interface SplineBackgroundProps {
   className?: string;
@@ -26,24 +25,9 @@ interface SplineErrorEvent {
   type?: string;
 }
 
-const FallbackBackground: React.FC<{ className?: string }> = ({ className }) => (
-  <div className={`${className} relative overflow-hidden`}>
-    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800" />
-    <div 
-      className="absolute inset-0 opacity-30"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1), transparent 70%),
-          radial-gradient(circle at 50% 100%, rgba(20, 184, 166, 0.1), transparent 70%)
-        `
-      }}
-    />
-  </div>
-);
-
 const SplineBackground: React.FC<SplineBackgroundProps> = ({
   className = '',
-  scene = '/assets/spline/scene.splinecode',
+  scene = 'https://prod.spline.design/W1bDWCDfRA2ltRN2/scene.splinecode',
   isInteractive = true,
   priority = false,
   onLoad,
@@ -73,39 +57,14 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
     return () => window.removeEventListener('resize', checkPerformance);
   }, []);
 
-  // Verify scene file exists
-  useEffect(() => {
-    const verifyScene = async () => {
-      try {
-        const response = await fetch(scene);
-        if (!response.ok) {
-          throw new Error(`Failed to load scene file: ${response.statusText}`);
-        }
-        const contentType = response.headers.get('content-type');
-        if (!contentType?.includes('application/octet-stream')) {
-          console.warn('Scene file might not be in the correct format:', contentType);
-        }
-      } catch (err) {
-        console.error('Scene verification failed:', err);
-        setError(err instanceof Error ? err : new Error('Failed to verify scene file'));
-      }
-    };
-
-    verifyScene();
-  }, [scene]);
-
   const handleLoad = useCallback(() => {
-    console.log('Spline scene loaded successfully');
     setIsLoaded(true);
-    setError(null);
     onLoad?.();
   }, [onLoad]);
 
-  const handleError = useCallback((error: Error | SplineErrorEvent) => {
-    const errorMessage = error instanceof Error ? error.message : error.message || 'Failed to load Spline scene';
-    console.error('Spline loading error:', errorMessage);
-    setError(error instanceof Error ? error : new Error(errorMessage));
-    onError?.(error instanceof Error ? error : new Error(errorMessage));
+  const handleError = useCallback((error: Error) => {
+    setError(error);
+    onError?.(error);
   }, [onError]);
 
   // Throttle mouse movement
@@ -121,8 +80,10 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
     }
   }, [isInteractive, isLowPerformance, handleMouseMove]);
 
-  if (isLowPerformance || error) {
-    return <FallbackBackground className={className} />;
+  if (isLowPerformance) {
+    return (
+      <div className={`${className} bg-gradient-to-br from-gray-900 to-gray-800`} />
+    );
   }
 
   return (
@@ -136,28 +97,24 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <ErrorBoundary
-              fallback={<FallbackBackground className="w-full h-full" />}
-            >
-              <Suspense 
-                fallback={
-                  <div className="w-full h-full">
-                    <FallbackBackground className="w-full h-full animate-pulse" />
-                  </div>
-                }
-              >
+            <Suspense fallback={
+              <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 animate-pulse" />
+            }>
+              {error ? (
+                <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800" />
+              ) : (
                 <Spline
                   scene={scene}
                   onLoad={handleLoad}
-                  onError={handleError}
+                  onError={(e: SplineErrorEvent) => handleError(new Error(e?.message || 'Unknown error'))}
                   style={{
                     width: '100%',
                     height: '100%',
                     pointerEvents: isInteractive ? 'auto' : 'none'
                   }}
                 />
-              </Suspense>
-            </ErrorBoundary>
+              )}
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>

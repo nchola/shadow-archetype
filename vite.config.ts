@@ -18,18 +18,10 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ['@splinetool/runtime', '@splinetool/react-spline']
   },
   build: {
     commonjsOptions: {
       include: [/@splinetool\/.*/, /node_modules/]
-    },
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          spline: ['@splinetool/runtime', '@splinetool/react-spline']
-        }
-      }
     }
   },
   optimizeDeps: {
