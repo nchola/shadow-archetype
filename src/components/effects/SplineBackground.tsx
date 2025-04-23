@@ -1,9 +1,10 @@
-import React, { Suspense, useCallback, useEffect, useState, lazy } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion, AnimatePresence } from 'framer-motion';
+import ErrorBoundary from '../ErrorBoundary';
 
-// Dynamically import Spline with no SSR
-const Spline = lazy(() => import('@splinetool/react-spline'));
+// Dynamic import with explicit path and type assertion
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
 
 interface SplineBackgroundProps {
   className?: string;
@@ -63,6 +64,7 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
   }, [onLoad]);
 
   const handleError = useCallback((error: Error) => {
+    console.warn('Spline loading error:', error);
     setError(error);
     onError?.(error);
   }, [onError]);
@@ -97,24 +99,26 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <Suspense fallback={
-              <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 animate-pulse" />
-            }>
-              {error ? (
-                <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800" />
-              ) : (
-                <Spline
-                  scene={scene}
-                  onLoad={handleLoad}
-                  onError={(e: SplineErrorEvent) => handleError(new Error(e?.message || 'Unknown error'))}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    pointerEvents: isInteractive ? 'auto' : 'none'
-                  }}
-                />
-              )}
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={
+                <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 animate-pulse" />
+              }>
+                {error ? (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800" />
+                ) : (
+                  <Spline
+                    scene={scene}
+                    onLoad={handleLoad}
+                    onError={(e: SplineErrorEvent) => handleError(new Error(e?.message || 'Unknown error'))}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      pointerEvents: isInteractive ? 'auto' : 'none'
+                    }}
+                  />
+                )}
+              </Suspense>
+            </ErrorBoundary>
           </motion.div>
         )}
       </AnimatePresence>
