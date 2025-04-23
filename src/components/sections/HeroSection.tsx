@@ -28,6 +28,16 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen bg-black relative overflow-hidden flex items-center">
+      {/* Brand Name */}
+      <div className="absolute top-8 right-8 z-20">
+        <h2 className="font-orbitron text-xl font-bold">
+          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
+          <a href="#" className="text-shadow-text font-orbitron text-xl md:text-2xl font-bold">
+          SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
+        </a>          </span>
+        </h2>
+      </div>
+
       {/* Left side - 3D Model */}
       <div className="w-1/2 h-screen relative">
         <div className="absolute inset-0">

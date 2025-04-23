@@ -33,9 +33,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#" className="text-shadow-text font-orbitron text-xl md:text-2xl font-bold">
-          SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
-        </a>
+        
 
         
 
