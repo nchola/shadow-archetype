@@ -27,23 +27,24 @@ const HeroSection = () => {
   const [showThirdLine, setShowThirdLine] = useState(false);
 
   return (
-    <section className="min-h-screen bg-black relative overflow-hidden flex items-center">
+    <section className="min-h-screen bg-black relative overflow-hidden flex flex-col md:flex-row items-center">
       {/* Brand Name */}
-      <div className="absolute top-8 right-8 z-20">
-        <h2 className="font-orbitron text-xl font-bold">
+      <div className="absolute top-4 md:top-8 right-4 md:right-8 z-20">
+        <h2 className="font-orbitron text-lg md:text-xl font-bold">
           <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-          <a href="#" className="text-shadow-text font-orbitron text-xl md:text-2xl font-bold">
-          SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
-        </a>          </span>
+            <a href="#" className="text-shadow-text font-orbitron text-lg md:text-2xl font-bold">
+              SHADOW<span className="text-shadow-accent">ARCHETYPE</span>
+            </a>
+          </span>
         </h2>
       </div>
 
-      {/* Left side - 3D Model */}
-      <div className="w-1/2 h-screen relative">
+      {/* 3D Model - Full width on mobile, half width on desktop */}
+      <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative">
         <div className="absolute inset-0">
           <ModelViewer
-            modelUrl="https://sketchfab.com/models/ec07ac844bc747518759436172b6f773/embed"
-            title="APOMIXIS"
+            modelUrl="https://sketchfab.com/models/606b7fe570dd4ae38e59fe3acf81e8a0/embed?ui_animations=0&ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0"
+            title="Core-collapse Supernova"
             className="w-full h-full"
             isActive={true}
             preload={true}
@@ -51,14 +52,14 @@ const HeroSection = () => {
             isCardView={false}
           />
         </div>
-        {/* Modify gradient overlay to not block interactions */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black opacity-90 pointer-events-none" />
+        {/* Gradient overlay - Adjusted for mobile */}
+        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-transparent to-black opacity-90 pointer-events-none" />
       </div>
 
-      {/* Right side - Text Content */}
-      <div className="w-1/2 pl-16 pr-8 relative z-10">
+      {/* Text Content - Full width on mobile, half width on desktop */}
+      <div className="w-full md:w-1/2 px-6 md:pl-16 md:pr-8 relative z-10 mt-8 md:mt-0">
         <div className="space-y-4">
-          <h1 className="font-orbitron text-4xl font-bold text-white tracking-wider leading-tight">
+          <h1 className="font-orbitron text-2xl md:text-4xl font-bold text-white tracking-wider leading-tight">
             {showFirstLine && (
               <TypewriterText 
                 text="EXPLORING THE DEPTHS OF" 
@@ -84,9 +85,9 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Background gradients */}
+      {/* Background gradients - Adjusted for mobile */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute right-0 top-0 w-1/3 h-full opacity-30"
+        <div className="absolute right-0 top-0 w-full md:w-1/3 h-full opacity-30"
           style={{
             background: `
               radial-gradient(circle at right, rgba(56, 189, 248, 0.15), transparent 70%),

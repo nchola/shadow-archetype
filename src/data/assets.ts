@@ -8,6 +8,18 @@ export interface Asset {
 
 export const assets: Asset[] = [
   {
+    title: "Information Singularity",
+    url: "https://sketchfab.com/models/b17dc9b2e98441be9ef9e67ac33e6db8/embed?ui_ar=0&ui_help=0",
+    page: "https://sketchfab.com/3d-models/information-singularity-b17dc9b2e98441be9ef9e67ac33e6db8",
+    category: "scientific"
+  },
+  {
+    title: "Core-collapse Supernova",
+    url: "https://sketchfab.com/models/606b7fe570dd4ae38e59fe3acf81e8a0/embed?ui_animations=0&ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0",
+    page: "https://sketchfab.com/models/606b7fe570dd4ae38e59fe3acf81e8a0",
+    category: "scientific"
+  },
+  {
     title: "APOMIXIS",
     url: "https://sketchfab.com/models/ec07ac844bc747518759436172b6f773/embed",
     page: "https://sketchfab.com/3d-models/apomixis-eaten-character-concept-ec07ac844bc747518759436172b6f773",
