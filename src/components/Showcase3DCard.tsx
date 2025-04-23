@@ -184,7 +184,7 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
             <div 
               className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-purple-500/20 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-16"
+                        opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20"
               style={{ willChange: 'opacity' }}
             />
 

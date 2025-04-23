@@ -3,7 +3,6 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Asset } from '../../data/assets';
 import Showcase3DCard from '../Showcase3DCard';
-import SplineBackground from '../effects/SplineBackground';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 interface VirtualizedAssetGridProps {
@@ -91,13 +90,7 @@ const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) =
       {/* Spline Background with enhanced styling */}
       <div className="absolute inset-0 -z-10 overflow-hidden rounded-2xl" style={{ height: '100%' }}>
         <div className="relative w-full h-full bg-opacity-70">
-          <SplineBackground 
-            className="w-full h-full opacity-70"
-            isInteractive={activeIndex !== -1}
-            priority={activeIndex !== -1}
-          />
           {/* Enhanced overlay to hide watermark */}
-          <div className="absolute bottom-0 right-0 w-48 h-24 bg-gradient-radial from-gray-900/95 via-gray-900/90 to-transparent backdrop-blur-[32px] z-20" />
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-900/90 via-gray-900/50 to-transparent z-10" />
         </div>
       </div>
