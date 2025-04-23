@@ -1,9 +1,12 @@
+import { Asset } from '../types';
+
 export interface Asset {
   title: string;
   url: string;
   page: string;
   author?: string;
   category: 'featured' | 'mystical' | 'classical' | 'scientific' | 'modern';
+  tags?: string[];
 }
 
 export const assets: Asset[] = [
@@ -110,8 +113,32 @@ export const assets: Asset[] = [
   },
   {
     title: "Cloud Chamber",
-    url: "https://sketchfab.com/models/913759bdac3b4084b46ddf3b40d12f82/embed?ui_infos=0",
+    url: "https://sketchfab.com/models/913759bdac3b4084b46ddf3b40d12f82/embed",
     page: "https://sketchfab.com/3d-models/cloud-chamber-913759bdac3b4084b46ddf3b40d12f82",
     category: "scientific"
+  },
+  {
+    title: "Desolation",
+    url: "https://sketchfab.com/models/2f52a9284cc448d994de5ce00761b957/embed",
+    page: "https://sketchfab.com/3d-models/desolation-2f52a9284cc448d994de5ce00761b957",
+    author: "Frenetik Void",
+    category: "mystical",
+    tags: ["space", "abstract", "dark"]
+  },
+  {
+    title: "Collapse",
+    url: "https://sketchfab.com/models/011baf0739e54ad59389a0c64ac298e8/embed",
+    page: "https://sketchfab.com/3d-models/collapse-011baf0739e54ad59389a0c64ac298e8",
+    author: "GolemKlonVIII",
+    category: "scientific",
+    tags: ["abstract", "structure", "dark"]
+  },
+  {
+    title: "A Star Forming Region",
+    url: "https://sketchfab.com/models/5583099ba6e9444ebf7f2b4d92e31625/embed?ui_infos=0",
+    page: "https://sketchfab.com/3d-models/a-star-forming-region-5583099ba6e9444ebf7f2b4d92e31625",
+    author: "Salvatore Orlando",
+    category: "scientific",
+    tags: ["space", "stars", "nebula"]
   }
 ]; 

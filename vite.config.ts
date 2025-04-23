@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
@@ -19,4 +19,20 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['@splinetool/runtime'],
+      output: {
+        globals: {
+          '@splinetool/runtime': 'splinetool'
+        }
+      }
+    },
+    commonjsOptions: {
+      include: [/@splinetool\/.*/, /node_modules/]
+    }
+  },
+  optimizeDeps: {
+    include: ['@splinetool/runtime', '@splinetool/react-spline']
+  }
 }));
