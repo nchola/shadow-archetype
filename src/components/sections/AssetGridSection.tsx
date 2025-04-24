@@ -7,7 +7,6 @@ import Footer from '../Footer';
 const AssetGridSection = () => {
   return (
     <>
-      <TransitionBreak />
       
       <section 
         id="assetgrid" 
