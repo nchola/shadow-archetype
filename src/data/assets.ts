@@ -1,4 +1,3 @@
-
 export interface Asset {
   title: string;
   url: string;
@@ -139,5 +138,83 @@ export const assets: Asset[] = [
     author: "Salvatore Orlando",
     category: "scientific",
     tags: ["space", "stars", "nebula"]
+  },
+  {
+    title: "The young accreting star DG Tauri B",
+    url: "https://sketchfab.com/models/4c3421a983c0439da40508b637e89725/embed?ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=1&ui_help=0&ui_settings=0&ui_vr=0&ui_annotations=0",
+    page: "https://sketchfab.com/3d-models/the-young-accreting-star-dg-tauri-b-4c3421a983c0439da40508b637e89725",
+    category: "scientific",
+    tags: ["space", "stars", "astronomy"]
+  },
+  {
+    title: "Cosmic Clocks",
+    url: "https://sketchfab.com/models/286cd0400fcd40fe9796065585b0ebf1/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/cosmic-clocks-286cd0400fcd40fe9796065585b0ebf1",
+    category: "scientific",
+    tags: ["space", "time", "abstract"]
+  },
+  {
+    title: "Quasar: the cosmic lighthouse",
+    url: "https://sketchfab.com/models/9c6d127d10894fdbb913705b1ca7c5ee/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/quasar-the-cosmic-lighthouse-9c6d127d10894fdbb913705b1ca7c5ee",
+    author: "moroplogo",
+    category: "scientific",
+    tags: ["space", "quasar", "astronomy"]
+  },
+  {
+    title: "Nebula space HDRi background photosphere",
+    url: "https://sketchfab.com/models/38e96b59f24345d9a757030eadc92bac/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/nebula-space-hdri-background-photosphere-38e96b59f24345d9a757030eadc92bac",
+    author: "Aliaksandr.melas",
+    category: "scientific",
+    tags: ["space", "nebula", "background"]
+  },
+  {
+    title: "Cosmic Unsanitorium",
+    url: "https://sketchfab.com/models/ef1439b1d5704130ae7bb79d92dabec4/embed",
+    page: "https://sketchfab.com/3d-models/cosmic-unsanitorium-ef1439b1d5704130ae7bb79d92dabec4",
+    author: "Natural Warp",
+    category: "mystical",
+    tags: ["space", "abstract", "dark"]
+  },
+  {
+    title: "Banban Evil Mutant Garten of Banban 8",
+    url: "https://sketchfab.com/models/f6f5213265964f3b8fa671f68538084b/embed",
+    page: "https://sketchfab.com/3d-models/banban-evil-mutant-garten-of-banban-8-f6f5213265964f3b8fa671f68538084b",
+    author: "Nelam0n",
+    category: "modern",
+    tags: ["character", "game", "horror"]
+  },
+  {
+    title: "Toon Baphomet",
+    url: "https://sketchfab.com/models/cca0fb19543c4d66ad79c7dc432cfa82/embed",
+    page: "https://sketchfab.com/3d-models/toon-baphomet-cca0fb19543c4d66ad79c7dc432cfa82",
+    author: "USERVIBE",
+    category: "mystical",
+    tags: ["character", "mythology", "cartoon"]
+  },
+  {
+    title: "Tiny Frog",
+    url: "https://sketchfab.com/models/c25c8980b93a460aa521ae62d3d94e0e/embed",
+    page: "https://sketchfab.com/3d-models/tiny-frog-c25c8980b93a460aa521ae62d3d94e0e",
+    author: "yanix",
+    category: "modern",
+    tags: ["character", "animal", "cute"]
+  },
+  {
+    title: "Center Floor",
+    url: "https://sketchfab.com/models/f1ad1b5d75874d7795a7df5c1a2c905e/embed",
+    page: "https://sketchfab.com/3d-models/center-floor-f1ad1b5d75874d7795a7df5c1a2c905e",
+    author: "cgart.com",
+    category: "modern",
+    tags: ["architecture", "interior", "design"]
+  },
+  {
+    title: "Circa Infinity",
+    url: "https://sketchfab.com/models/93ec20028510461e963f9990e2af0e5b/embed",
+    page: "https://sketchfab.com/3d-models/circa-infinity-93ec20028510461e963f9990e2af0e5b",
+    author: "aronegal",
+    category: "mystical",
+    tags: ["abstract", "infinity", "space"]
   }
 ]; 
