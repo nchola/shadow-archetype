@@ -32,6 +32,7 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isCardViewOnly, setIsCardViewOnly] = useState(false);
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
   const [animationDelay] = useState(() => Math.random() * 0.5);
   const { shouldPreload, priority } = usePreloadStrategy(index, totalItems, viewportPosition);
 
@@ -177,37 +178,54 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
         >
           <div 
             className="relative h-full rounded-xl overflow-hidden
-                      backdrop-blur-sm bg-gray-900/50 
+                      backdrop-blur-sm bg-gray-900/90 
                       transition-all duration-500
-                      group-hover:backdrop-blur-md group-hover:bg-gray-800/60"
+                      group-hover:backdrop-blur-md group-hover:bg-gray-800/90"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+            {/* Enhanced background layers */}
+            <div className="absolute inset-0 bg-gray-900/95 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-10" />
             <div 
               className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-purple-500/20 
                         opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20"
               style={{ willChange: 'opacity' }}
             />
 
+            {/* Loading placeholder */}
+            {!isModelLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center z-30">
+                <div className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
+              </div>
+            )}
+
             {/* View mode toggle button */}
             <button
               onClick={toggleViewMode}
-              className="view-toggle-btn absolute top-4 right-4 z-30 p-2 rounded-full
-                       bg-gray-800/80 backdrop-blur-sm
+              className="view-toggle-btn absolute top-4 right-4 z-40 p-2 rounded-full
+                       bg-gray-800/90 backdrop-blur-sm
                        text-white hover:text-cyan-300 transition-colors
-                       hover:bg-gray-700/80"
+                       hover:bg-gray-700/90"
             >
               {isCardViewOnly ? <FaCompress size={16} /> : <FaExpand size={16} />}
             </button>
 
-            {/* Model viewer */}
+            {/* Model viewer with loading state */}
             {(isVisible || shouldPreload) && (
               <div className="relative w-full h-full">
                 <ModelViewer
                   modelUrl={url}
                   title={title}
-                  className="w-full h-full"
-                  onLoad={() => console.log(`${title} loaded`)}
-                  onError={(error) => console.error(`Error loading ${title}:`, error)}
+                  className={`w-full h-full transition-opacity duration-500 ${
+                    isModelLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => {
+                    console.log(`${title} loaded`);
+                    setIsModelLoaded(true);
+                  }}
+                  onError={(error) => {
+                    console.error(`Error loading ${title}:`, error);
+                    setIsModelLoaded(true); // Still show the card even if there's an error
+                  }}
                   isActive={isActive || isCardViewOnly}
                   preload={shouldPreload}
                   priority={priority}
@@ -218,10 +236,10 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
 
             {/* Title and author info */}
             <div 
-              className="absolute bottom-0 left-0 right-0 p-4 z-30
-                        backdrop-blur-md bg-gray-800/30 
+              className="absolute bottom-0 left-0 right-0 p-4 z-40
+                        backdrop-blur-md bg-gray-800/90 
                         transform-gpu transition-all duration-500
-                        group-hover:backdrop-blur-lg group-hover:bg-gray-800/40"
+                        group-hover:backdrop-blur-lg group-hover:bg-gray-800/95"
             >
               <h3 className="text-lg font-semibold text-white mb-1 
                           transition-colors group-hover:text-cyan-200">{title}</h3>
@@ -241,14 +259,14 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95"
           >
             <motion.div
               ref={modalRef}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-6xl aspect-video bg-gray-900 rounded-xl overflow-hidden"
+              className="relative w-full max-w-6xl aspect-video bg-gray-900/95 rounded-xl overflow-hidden"
             >
               <div className="absolute inset-0">
                 <ModelViewer
@@ -262,7 +280,7 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
                 />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
                 <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
                 {author && <p className="text-gray-300 mb-3">by {author}</p>}
                 <a

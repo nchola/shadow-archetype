@@ -18,45 +18,67 @@ const CATEGORIES = [
   { id: 'modern', label: 'Modern' }
 ];
 
+// Cache untuk menyimpan hasil filter per kategori
+const categoryCache = new Map<string, Asset[]>();
+
 const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);
-  const autoPlayInterval = useRef<NodeJS.Timeout>();
+  const transitionTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Filter assets based on selected category
-  const filteredAssets = useMemo(() => 
-    assets.filter(asset => selectedCategory === 'all' || asset.category === selectedCategory),
-    [selectedCategory, assets]
-  );
-
-  // Auto-play functionality
+  // Preload assets untuk kategori yang sering diakses
   useEffect(() => {
-    if (filteredAssets.length > 0) {
-      autoPlayInterval.current = setInterval(() => {
-        setActiveIndex(prev => {
-          const nextIndex = (prev + 1) % filteredAssets.length;
-          return nextIndex;
-        });
-      }, 14000); // 12 seconds interval
+    // Preload kategori "all" saat komponen mount
+    if (!categoryCache.has('all')) {
+      categoryCache.set('all', assets);
     }
 
-    return () => {
-      if (autoPlayInterval.current) {
-        clearInterval(autoPlayInterval.current);
+    // Preload kategori lain di background
+    const preloadCategories = async () => {
+      for (const category of CATEGORIES) {
+        if (category.id !== 'all' && !categoryCache.has(category.id)) {
+          const filtered = assets.filter(asset => asset.category === category.id);
+          categoryCache.set(category.id, filtered);
+        }
       }
     };
-  }, [filteredAssets.length]);
+    preloadCategories();
 
-  // Handle category change
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, [assets]);
+
+  // Optimized filtering dengan cache
+  const filteredAssets = useMemo(() => {
+    if (categoryCache.has(selectedCategory)) {
+      return categoryCache.get(selectedCategory)!;
+    }
+    
+    const filtered = assets.filter(asset => 
+      selectedCategory === 'all' || asset.category === selectedCategory
+    );
+    categoryCache.set(selectedCategory, filtered);
+    return filtered;
+  }, [selectedCategory, assets]);
+
+  // Handle category change dengan transisi yang lebih smooth
   const handleCategoryChange = useCallback((categoryId: string) => {
-    setSelectedCategory(categoryId);
-    setActiveIndex(-1);
-  }, []);
+    setIsTransitioning(true);
+    
+    // Clear timeout jika ada
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
 
-  // Handle card activation
-  const handleCardActivate = useCallback((index: number) => {
-    setActiveIndex(prev => prev === index ? -1 : index);
+    // Set timeout untuk mengatur state
+    transitionTimeoutRef.current = setTimeout(() => {
+    setSelectedCategory(categoryId);
+      setIsTransitioning(false);
+    }, 100); // Small delay untuk memastikan animasi exit selesai
   }, []);
 
   return (
@@ -106,36 +128,38 @@ const VirtualizedAssetGrid: React.FC<VirtualizedAssetGridProps> = ({ assets }) =
               ${selectedCategory === category.id 
                 ? 'bg-cyan-500/20 text-cyan-300 shadow-lg shadow-cyan-500/20' 
                 : 'bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-gray-300'}
+              ${isTransitioning ? 'opacity-50 pointer-events-none' : ''}
             `}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            disabled={isTransitioning}
           >
             {category.label}
           </motion.button>
         ))}
       </div>
 
-      {/* Grid Layout */}
+      {/* Grid Layout dengan optimasi rendering */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 relative z-10">
         <AnimatePresence mode="wait">
-          {filteredAssets.map((asset, idx) => (
+          {!isTransitioning && filteredAssets.map((asset, idx) => (
             <motion.div
-              key={asset.title}
+              key={`${asset.title}-${selectedCategory}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ 
-                duration: 0.5,
-                delay: idx * 0.1
+                duration: 0.3,
+                delay: idx * 0.05
               }}
             >
               <Showcase3DCard
                 {...asset}
-                isActive={idx === activeIndex}
+                isActive={false}
                 index={idx}
                 totalItems={filteredAssets.length}
                 viewportPosition={{ top: 0, bottom: 0 }}
-                onActivate={() => handleCardActivate(idx)}
+                onActivate={() => {}}
               />
             </motion.div>
           ))}
