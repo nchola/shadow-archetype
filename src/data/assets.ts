@@ -32,7 +32,7 @@ export const assets: Asset[] = [
     url: "https://sketchfab.com/models/d78ec3cd39034e8ca2276973a832f298/embed",
     page: "https://sketchfab.com/3d-models/sun-and-moon-tarot-d78ec3cd39034e8ca2276973a832f298",
     author: "Tarot Master",
-    category: "mystical"
+    category: "featured"
   },
   {
     title: "The Magus",
@@ -101,7 +101,7 @@ export const assets: Asset[] = [
     title: "Feudal Japan: Oiran",
     url: "https://sketchfab.com/models/27be63b9f5014121a4f5021e6514c47d/embed",
     page: "https://sketchfab.com/3d-models/feudal-japan-oiran-27be63b9f5014121a4f5021e6514c47d",
-    category: "classical"
+    category: "featured"
   },
   {
     title: "Particle Wave",
@@ -217,5 +217,103 @@ export const assets: Asset[] = [
     category: "mystical",
     tags: ["abstract", "infinity", "space"]
   },
-  
+  {
+    title: "Steamboat Willie",
+    url: "https://sketchfab.com/models/97ccff4d86c64f53b81933fe11c9f1f9/embed",
+    page: "https://sketchfab.com/3d-models/steamboat-willie-97ccff4d86c64f53b81933fe11c9f1f9",
+    author: "Disney",
+    category: "modern",
+    tags: ["character", "animation", "cartoon"]
+  },
+  {
+    title: "Theopathy Official Soul Harvester",
+    url: "https://sketchfab.com/models/98b1fb72f5124df5ab98d05216feb3f2/embed",
+    page: "https://sketchfab.com/3d-models/theopathy-official-soul-harvester-98b1fb72f5124df5ab98d05216feb3f2",
+    author: "Lance",
+    category: "mystical",
+  },
+  {
+    title: "Forest Ruins",
+    url: "https://sketchfab.com/models/3e9075a7a5bc4dfea6a1e84c1909203c/embed",
+    page: "https://sketchfab.com/3d-models/forest-ruins-3e9075a7a5bc4dfea6a1e84c1909203c",
+    author: "BUKKBEEK",
+    category: "mystical",
+  },
+  {
+    title: "Hand monster",
+    url: "https://sketchfab.com/models/4f709306703b4fb58db157dd8c3d8d55/embed",
+    page: "https://sketchfab.com/3d-models/hand-monster-4f709306703b4fb58db157dd8c3d8d55",
+    author: "Fanny NGO",
+    category: "mystical",
+  },
+  {
+    title: "Greyface",
+    url: "https://sketchfab.com/models/19902070311f46dbbb9335a5d26b0a7b/embed",
+    page: "https://sketchfab.com/3d-models/greyface-19902070311f46dbbb9335a5d26b0a7b",
+    author: "Ryan Wheeler",
+    category: "mystical",
+  },
+  {
+    title: "RE8 Baby Rig",
+    url: "https://sketchfab.com/models/4739be16f22449bbbfcd625eeff51810/embed",
+    page: "https://sketchfab.com/3d-models/re8-baby-rig-4739be16f22449bbbfcd625eeff51810",
+    author: "Ferris Wheel",
+    category: "mystical",
+  },
+  {
+    title: "Open Mouth",
+    url: "https://sketchfab.com/models/f94bd3d1c830436eb9ecc8759210fb97/embed",
+    page: "https://sketchfab.com/3d-models/open-mouth-f94bd3d1c830436eb9ecc8759210fb97",
+    author: "4den",
+    category: "mystical",
+  },
+  {
+    title: "Cartoon Shin Demon Rig",
+    url: "https://sketchfab.com/models/fcbf1320499e488da30f73b1a7bf91a6/embed",
+    page: "https://sketchfab.com/3d-models/cartoon-shin-demon-rig-fcbf1320499e488da30f73b1a7bf91a6",
+    author: "Ferris Wheel",
+    category: "mystical",
+  },
+  {
+    title: "Seraphim",
+    url: "https://sketchfab.com/models/044a884faf664245bc7b9b9f303bc967/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/seraphim-044a884faf664245bc7b9b9f303bc967",
+    author: "Mateusz Wolinski",
+    category: "featured",
+  },
+  {
+    title: "Whispers",
+    url: "https://sketchfab.com/models/e658a489e35d4473a432c1badc3940e8/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/whispers-e658a489e35d4473a432c1badc3940e8",
+    author: "Schmold.art",
+    category: "featured",
+  },
+  {
+    title: "Angel",
+    url: "https://sketchfab.com/models/17d22525b4124088a8827d9c45a2627f/embed?autospin=1&autostart=1&preload=1&ui_theme=dark&ui_animations=0&ui_infos=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0&ui_watermark=0&ui_hint=0&ui_controls=0&ui_loading=0&ui_title=0&transparent=1&dnt=1&camera=0&scrollwheel=0&orbit=0,0.8,-1.5&zoom=0.8",
+    page: "https://sketchfab.com/3d-models/angel-17d22525b4124088a8827d9c45a2627f",
+    author: "Just8",
+    category: "featured",
+  },
+  {
+    title: "Deadly Melodic",
+    url: "https://sketchfab.com/models/d60f5ca4c0bf4794a5dee82a040ce99f/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/deadly-melodic-d60f5ca4c0bf4794a5dee82a040ce99f",
+    author: "1ooooJ0Y",
+    category: "featured",
+  },
+  {
+    title: "The Orbitrator",
+    url: "https://sketchfab.com/models/a38a373147bc4184869c6770a5cd8069/embed?ui_theme=dark",
+    page: "https://sketchfab.com/3d-models/the-orbitrator-a38a373147bc4184869c6770a5cd8069",
+    author: "Ruslan Abasov",
+    category: "mystical",
+  },
+  {
+    title: "Holometabolous",
+    url: "https://sketchfab.com/models/2740866a64f14aa8affc3798b51d5589/embed",
+    page: "https://sketchfab.com/3d-models/holometabolous-2740866a64f14aa8affc3798b51d5589",
+    author: "Mateusz Wolinski",
+    category: "featured",
+  },
 ]; 

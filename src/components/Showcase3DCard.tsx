@@ -259,16 +259,23 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95"
           >
             <motion.div
               ref={modalRef}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-6xl aspect-video bg-gray-900/95 rounded-xl overflow-hidden"
+              className="relative w-full max-w-6xl aspect-video bg-gray-900/95 rounded-xl overflow-hidden mt-16"
             >
-              <div className="absolute inset-0">
+              <button
+                onClick={handleCloseModal}
+                className="absolute top-4 right-4 z-[102] p-2 rounded-full bg-gray-800/90 backdrop-blur-sm text-white hover:text-cyan-300 transition-colors hover:bg-gray-700/90"
+              >
+                <FaCompress size={16} />
+              </button>
+
+              <div className="absolute inset-0 z-[101]">
                 <ModelViewer
                   modelUrl={url}
                   title={title}
@@ -280,15 +287,14 @@ const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
                 />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-[102]">
                 <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
                 {author && <p className="text-gray-300 mb-3">by {author}</p>}
                 <a
                   href={page}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-4 py-2 bg-cyan-600 text-white rounded-lg
-                           hover:bg-cyan-500 transition-colors"
+                  className="inline-block px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors"
                 >
                   View on Sketchfab
                 </a>
