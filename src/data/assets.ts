@@ -216,5 +216,6 @@ export const assets: Asset[] = [
     author: "aronegal",
     category: "mystical",
     tags: ["abstract", "infinity", "space"]
-  }
+  },
+  
 ]; 
